@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Desafio";
+}
+
+    <p>Envio de arquivo json do desafio</p>
+
+<div class="row">
+    <input type="file" name="file" id="fileInput" multiple />
+    <input type="button" id="fileButton" value="Updload" /><br />
+ 
+</div>
+
+ 
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#fileButton").click(function () {
+            var files = $("#fileInput").get(0).files;
+            var fileData = new FormData();
+
+            for (var i = 0; i < files.length; i++) {
+
+                  fileData.append("answer", files[i]);
+            }
+ 
+            $.ajax({
+                type: "POST",
+                url: "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=xxxxxxxxxx",
+                contentType: false,  
+                processData: false,  
+                mimeType:'multipart/form-data',
+                data: fileData,
+                success: function (result, status, xhr) {
+                    alert(result);
+                },
+                error: function (xhr, status, error) {
+                    alert(status);
+                }
+            });
+    });
+
+
+
+    });
+</script>
