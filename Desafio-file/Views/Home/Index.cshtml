@@ -2,15 +2,22 @@
     ViewBag.Title = "Desafio";
 }
 
-    <p>Envio de arquivo json do desafio</p>
+<p>Envio de arquivo json do desafio</p>
 
-<div class="row">
-    <input type="file" name="file" id="fileInput" multiple />
-    <input type="button" id="fileButton" value="Updload" /><br />
- 
-</div>
+@*<div class="row">
+        <input type="file" name="file" id="fileInput" multiple />
+        <input type="button" id="fileButton" value="Updload" /><br />
 
- 
+    </div>*@
+
+
+<form action="https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=59e7ed2f0677755c42593373624c1b3bad67df16"
+      method="post" enctype="multipart/form-data">
+    <input type="file" name="answer">
+    <button>Enviar arquivo</button>
+</form>
+
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 <script>
@@ -21,15 +28,15 @@
 
             for (var i = 0; i < files.length; i++) {
 
-                  fileData.append("answer", files[i]);
+                fileData.append("answer", files[i]);
             }
- 
+
             $.ajax({
                 type: "POST",
                 url: "https://api.codenation.dev/v1/challenge/dev-ps/submit-solution?token=xxxxxxxxxx",
-                contentType: false,  
-                processData: false,  
-                mimeType:'multipart/form-data',
+                contentType: false,
+                processData: false,
+                mimeType: 'multipart/form-data',
                 data: fileData,
                 success: function (result, status, xhr) {
                     alert(result);
@@ -38,7 +45,7 @@
                     alert(status);
                 }
             });
-    });
+        });
 
 
 
